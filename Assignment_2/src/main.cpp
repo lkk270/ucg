@@ -92,10 +92,10 @@ void raytrace_parallelogram() {
 
 			// TODO: Check if the ray intersects with the parallelogram
 
-			Vector2d ray_on_xy(ray_origin(0),ray_origin(1));
-			const double sphere_radius = 0.9;
+			Vector2d ray_on_xy(ray_origin(0),ray_origin(0));
+			const double mid = 1.0;
 
-			if (ray_on_xy.norm() < sphere_radius) {
+			if (ray_on_xy.norm() < mid) {
 				// TODO: The ray hit the parallelogram, compute the exact intersection point
 				Vector3d ray_intersection(0,0,0);
 
