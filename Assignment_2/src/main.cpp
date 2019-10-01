@@ -77,9 +77,9 @@ void raytrace_parallelogram() {
 	Vector3d y_displacement(0,-2.0/C.rows(),0);
 
 	// TODO: Parameters of the parallelogram (position of the lower-left corner + two sides)
-	Vector3d pgram_origin;
-	Vector3d pgram_u;
-	Vector3d pgram_v;
+	Vector3d pgram_origin(-1,1,1);
+	Vector3d pgram_u(2.0/C.cols(),0,0);;
+	Vector3d pgram_v(0,-2.0/C.rows(),0);
 
 	// Single light source
 	const Vector3d light_position(-1,1,1);
@@ -91,7 +91,11 @@ void raytrace_parallelogram() {
 			Vector3d ray_direction = RowVector3d(0,0,-1);
 
 			// TODO: Check if the ray intersects with the parallelogram
-			if (true) {
+
+			Vector2d ray_on_xy(ray_origin(0),ray_origin(1));
+			const double sphere_radius = 0.9;
+
+			if (ray_on_xy.norm() < sphere_radius) {
 				// TODO: The ray hit the parallelogram, compute the exact intersection point
 				Vector3d ray_intersection(0,0,0);
 
