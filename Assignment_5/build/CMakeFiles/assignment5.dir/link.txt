@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/assignment5.dir/src/main.cpp.o CMakeFiles/assignment5.dir/src/helpers.cpp.o  -o assignment5 glfw/src/libglfw3.a glad/libglad.a -framework Cocoa -framework IOKit -framework CoreFoundation -framework CoreVideo 
