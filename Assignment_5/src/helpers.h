@@ -7,7 +7,7 @@
 #include <string>
 ////////////////////////////////////////////////////////////////////////////////
 
-class VertexArrayObject {
+class VertexArrayObject { //Object stores conenctions between program and data on gpu
 public:
 	unsigned int id;
 
@@ -25,25 +25,25 @@ public:
 
 // -----------------------------------------------------------------------------
 
-class VertexBufferObject {
+class VertexBufferObject { //creates buffer on gpu
 public:
 	typedef unsigned int GLuint;
 	typedef int GLint;
 
-	GLuint id;
+	GLuint id; 
 	GLuint rows;
 	GLuint cols;
 
-	VertexBufferObject() : id(0), rows(0), cols(0) { }
+	VertexBufferObject() : id(0), rows(0), cols(0) { } //consturctor initializes everything to 0
 
 	// Create a new empty VBO
-	void init();
+	void init(); //calls GLuint bufer
 
-	// Updates the VBO with a matrix M
+	// Updates the VBO with a matrix M //converts eigen matrix into a video
 	void update(const Eigen::MatrixXf& M);
 
 	// Select this VBO for subsequent draw calls
-	void bind();
+	void bind(); //binds - uses the buffer
 
 	// Release the id
 	void free();
@@ -57,11 +57,12 @@ public:
 	typedef unsigned int GLuint;
 	typedef int GLint;
 
+	//3 gpu objects we need
 	GLuint vertex_shader;
 	GLuint fragment_shader;
 	GLuint program_shader;
 
-	Program() : vertex_shader(0), fragment_shader(0), program_shader(0) { }
+	Program() : vertex_shader(0), fragment_shader(0), program_shader(0) { } 
 
 	// Create a new shader from the specified source strings
 	bool init(const std::string &vertex_shader_string,
@@ -69,10 +70,10 @@ public:
 		const std::string &fragment_data_name);
 
 	// Select this shader for subsequent draw calls
-	void bind();
+	void bind(); 
 
 	// Release all OpenGL objects
-	void free();
+	void free(); //dealocates stuff on gpu
 
 	// Return the OpenGL handle of a named shader attribute (-1 if it does not exist)
 	GLint attrib(const std::string &name) const;
@@ -96,4 +97,4 @@ void _check_gl_error(const char *file, int line);
 /// [... some opengl calls]
 /// glCheckError();
 ///
-#define check_gl_error() _check_gl_error(__FILE__,__LINE__)
+#define check_gl_error() _check_gl_error(__FILE__,__LINE__) //injects name of file and current line

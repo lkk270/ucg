@@ -36,10 +36,10 @@ void VertexBufferObject::free() {
 	check_gl_error();
 }
 
-void VertexBufferObject::update(const Eigen::MatrixXf& M) {
-	assert(id != 0);
-	glBindBuffer(GL_ARRAY_BUFFER, id);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*M.size(), M.data(), GL_DYNAMIC_DRAW);
+void VertexBufferObject::update(const Eigen::MatrixXf& M) { 
+	assert(id != 0); //checks condition inside - used for debug name. 
+	glBindBuffer(GL_ARRAY_BUFFER, id); //binding current buffer
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*M.size(), M.data(), GL_DYNAMIC_DRAW); //uploads from cpu to gpu. tells how many bytes we will copy. measures bytes in a float
 	rows = M.rows();
 	cols = M.cols();
 	check_gl_error();
@@ -53,8 +53,8 @@ bool Program::init(
 	const std::string &fragment_data_name)
 {
 	using namespace std;
-	vertex_shader = create_shader_helper(GL_VERTEX_SHADER, vertex_shader_string);
-	fragment_shader = create_shader_helper(GL_FRAGMENT_SHADER, fragment_shader_string);
+	vertex_shader = create_shader_helper(GL_VERTEX_SHADER, vertex_shader_string); //creates vertex shader from string
+	fragment_shader = create_shader_helper(GL_FRAGMENT_SHADER, fragment_shader_string); //creates fragment shader from string
 
 	if (!vertex_shader || !fragment_shader) {
 		return false;
@@ -71,7 +71,7 @@ bool Program::init(
 	GLint status;
 	glGetProgramiv(program_shader, GL_LINK_STATUS, &status);
 
-	if (status != GL_TRUE) {
+	if (status != GL_TRUE) { //checks if everything went well
 		char buffer[512];
 		glGetProgramInfoLog(program_shader, 512, NULL, buffer);
 		cerr << "Linker error: " << endl << buffer << endl;
